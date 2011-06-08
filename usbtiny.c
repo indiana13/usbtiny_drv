@@ -25,6 +25,11 @@ struct usbtiny_isp {
 
 #define to_usbtiny_dev(d) container_of(d, struct usbtiny_isp, refcount)
 
+static const struct file_operations usbtiny_fops = {
+	.owner =	THIS_MODULE,
+	0
+};
+
 /*
  * usb class driver info in order to get a minor number from the usb core,
  * and to have the device registered with the driver core
@@ -32,7 +37,7 @@ struct usbtiny_isp {
 static struct usb_class_driver usbtiny_class = {
 	.name =		"usbtiny%d",
 	.minor_base =	USBTINY_MINOR_BASE,
-	.fops = 	NULL
+	.fops = 	&usbtiny_fops,
 };
 
 static void usbtiny_delete(struct kref *kref)
