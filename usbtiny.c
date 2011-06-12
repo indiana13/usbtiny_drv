@@ -7,6 +7,8 @@
 #include <linux/uaccess.h>
 #include <linux/usb.h>
 
+#include "controls.h"
+
 #define USBTINY_DEV_NAME	"USBTinyISP"
 #define USBTINY_VENDOR_ID	0x1781
 #define USBTINY_PRODUCT_ID	0x0C9F
@@ -71,6 +73,7 @@ static int usbtiny_probe(struct usb_interface *interface,
 	dev_info(&interface->dev,
 		 "USBTinyISP device now attached to /dev/usbtiny%d",
 		 interface->minor);
+	/* TODO: send POWER_ON control URB */
 	return 0;
 
 error:
